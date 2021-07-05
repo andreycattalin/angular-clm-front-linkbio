@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="3px" height="12px" viewBox="0 0 3 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>more</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-638.000000, -194.000000)" fill="#666686" fill-rule="nonzero">
+            <g id="more" transform="translate(638.000000, 194.000000)">
+                <circle id="Oval" cx="1.33334375" cy="1.33334375" r="1.33334375"></circle>
+                <circle id="Oval" cx="1.33334375" cy="6" r="1.33334375"></circle>
+                <circle id="Oval" cx="1.33334375" cy="10.6666563" r="1.33334375"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

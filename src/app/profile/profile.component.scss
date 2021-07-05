@@ -1,0 +1,42 @@
+@import '../../styles';
+.btn-big {
+    width: 100%;
+    background-color: $mainColor;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 40px;
+    padding: 14px;
+    margin: 40px 0;
+}
+
+.btn-dots {
+    background: rgba(211, 217, 225, 0.40);
+    border-radius: 22px;
+    padding: 10px 30px;
+    border: 0px;
+    img {
+        height: 20px;
+    }
+    &::after {
+        display: none;
+    }
+}
+
+.btn-primary {
+    background: rgba(211, 217, 225, 0.40);
+    border-radius: 22px;
+    padding: 10px 30px;
+    color: #1C2B55;
+    margin-right: 10px;
+    border: 0px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 0px;
+}
+
+p {
+    margin-bottom: 0px;
+    margin-top: 8px;
+}

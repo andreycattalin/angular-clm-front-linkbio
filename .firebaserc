@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "demoproject-1f866": {
+      "hosting": {
+        "linkbio": [
+          "demoproject-1f866"
+        ]
+      }
+    }
+  }
+}
