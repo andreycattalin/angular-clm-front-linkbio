@@ -17,7 +17,7 @@ export class AppComponent {
     router.events.subscribe(evento => {
 
       if( evento instanceof NavigationEnd) {
-        if(this.router.url == "/") {
+        if(this.router.url == "/" || this.router.url.includes("/bio/")) {
           this.showMenu = false
         } else {
           this.showMenu = true

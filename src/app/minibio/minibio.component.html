@@ -1,0 +1,23 @@
+<div class="container" *ngIf="isLoaded">
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-lg-5 head" [ngClass]="{'dark': isDarkMode}">
+            <img [src]="user.image" alt="Andrey Marin">
+            <h1>{{user.username}}</h1>
+            <p>{{user.description}}</p>
+
+            <a *ngFor="let item of user.links" href="{{item.link}}" class="link-item d-flex align-items-center" target="_blank">
+                <div class="item-right">
+                    <p>{{item.title}}</p>
+                </div>
+            </a>
+
+            <button class="btn-mode" type="button" (click)="changeMode()">
+            <span *ngIf="isDarkMode">Noche</span>
+            <span *ngIf="!isDarkMode">Dia</span>
+          </button>
+
+        </div>
+
+    </div>
+</div>

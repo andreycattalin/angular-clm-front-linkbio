@@ -56,5 +56,10 @@ export class ProfileComponent implements OnInit {
   editBio(id: any) {
     this.router.navigate(["edit-bio/" + id])
   }
+
+  visit(id: any) {
+    const uid = this.authService.userData().uid
+    this.router.navigate(["bio/" + uid + "/" + id])
+  }
 }
 

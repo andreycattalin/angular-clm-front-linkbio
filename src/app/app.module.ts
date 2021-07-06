@@ -14,14 +14,16 @@ import { CreateBioComponent } from './create-bio/create-bio.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule } from 'angular-notifier';
+import { MinibioComponent } from './minibio/minibio.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
       HomeComponent,
       ProfileComponent,
       CreateBioComponent,
-      MenuComponent
+      MenuComponent,
+      MinibioComponent
    ],
   imports: [
     BrowserModule,

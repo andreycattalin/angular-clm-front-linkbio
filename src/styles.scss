@@ -1,8 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 $mainColor: #4D1CDF;
+$black: #000;
+$shadow: -1px 3px 40px -2px rgba(181, 181, 194, 0.8);
+$shadowDark: -1px 3px 40px -2px rgba(49, 49, 58, 0.8);
 body {
     background-color: #F0F1F4;
+    &.dark {
+        background-color: black;
+    }
 }
 
 .mcard {

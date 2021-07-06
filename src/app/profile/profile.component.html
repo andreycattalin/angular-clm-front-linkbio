@@ -19,7 +19,7 @@
                         <h1>{{item.title}}</h1>
                     </div>
                     <div class="p-2 flex-shrink-1 bd-highlight">
-                        <button type="button" class="btn btn-primary">Visitar</button>
+                        <button type="button" (click)="visit(item.id)" class="btn btn-primary">Visitar</button>
 
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary btn-dots dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

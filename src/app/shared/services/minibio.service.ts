@@ -35,5 +35,9 @@ export class MinibioService {
     return this.fireStore.collection('users').doc(uid).collection('minibios').doc(id).get()
   }
 
+  getMiniBioPublic(userid: string, id: string) {
+    return this.fireStore.collection('users').doc(userid).collection('minibios').doc(id).get()
+  }
+
 
 }
