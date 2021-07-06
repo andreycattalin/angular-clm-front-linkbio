@@ -8,4 +8,5 @@ export class Minibio {
   linkUrl2: string = "";
   linkTitle3: string = "";
   linkUrl3: string = "";
+  id?: string;
 }

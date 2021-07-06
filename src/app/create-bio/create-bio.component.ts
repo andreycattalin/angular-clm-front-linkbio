@@ -14,6 +14,8 @@ export class CreateBioComponent implements OnInit {
   bioForm: FormGroup
 
   constructor(private fb: FormBuilder, private notifier: NotifierService, private minibioService: MinibioService) {
+//    const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+
     this.bioForm = this.fb.group({
       title: ["", Validators.required],
       description: ["", Validators.required],

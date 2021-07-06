@@ -12,11 +12,11 @@
     <div class="row justify-content-center">
         <div class="col-md-7 col-xl-5 text-end">
 
-            <div class="mcard">
+            <div class="mcard" *ngFor="let item of allBios">
 
                 <div class="d-flex bd-highlight">
                     <div class="p-2 flex-grow-1 bd-highlight text-start align-self-center">
-                        <h1>Hola</h1>
+                        <h1>{{item.title}}</h1>
                     </div>
                     <div class="p-2 flex-shrink-1 bd-highlight">
                         <button type="button" class="btn btn-primary">Visitar</button>
@@ -26,8 +26,8 @@
                               <img src="../../assets/img/more.svg" alt="más">
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Editar</a></li>
-                                <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                <li><button class="dropdown-item">Editar</button></li>
+                                <li><button class="dropdown-item" (click)="deleteBio(item.id)">Eliminar</button></li>
                             </ul>
                         </div>
 
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="d-flex bd-highlight">
-                    <p class="p-2">Lorem ipsum dolor sit amet consectetur adipisicing</p>
+                    <p class="p-2">{{item.description}}</p>
                 </div>
 
             </div>
