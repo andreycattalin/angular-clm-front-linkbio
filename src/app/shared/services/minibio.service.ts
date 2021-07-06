@@ -15,6 +15,11 @@ export class MinibioService {
     return this.fireStore.collection('users').doc(uid).collection('minibios').add(data)
   }
 
+  updateMinibio(id: string, data: any) {
+    const uid = this.authService.userData().uid
+    return this.fireStore.collection('users').doc(uid).collection('minibios').doc(id).update(data)
+  }
+
   loadMinibios() {
     const uid = this.authService.userData().uid
     return this.fireStore.collection('users').doc(uid).collection('minibios').get()
@@ -24,5 +29,11 @@ export class MinibioService {
     const uid = this.authService.userData().uid
     return this.fireStore.collection('users').doc(uid).collection('minibios').doc(idToDelete).delete()
   }
+
+  getMiniBio(id: string) {
+    const uid = this.authService.userData().uid
+    return this.fireStore.collection('users').doc(uid).collection('minibios').doc(id).get()
+  }
+
 
 }

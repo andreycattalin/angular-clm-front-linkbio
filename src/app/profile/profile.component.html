@@ -26,7 +26,7 @@
                               <img src="../../assets/img/more.svg" alt="más">
                             </button>
                             <ul class="dropdown-menu">
-                                <li><button class="dropdown-item">Editar</button></li>
+                                <li><button class="dropdown-item" (click)="editBio(item.id)">Editar</button></li>
                                 <li><button class="dropdown-item" (click)="deleteBio(item.id)">Eliminar</button></li>
                             </ul>
                         </div>

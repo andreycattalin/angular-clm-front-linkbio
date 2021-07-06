@@ -8,7 +8,8 @@ import { AuthGuard } from './shared/guard/auth.guard';
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full" },
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: "create-bio", component: CreateBioComponent, canActivate: [AuthGuard] }
+  { path: "create-bio", component: CreateBioComponent, canActivate: [AuthGuard] },
+  { path: "edit-bio/:id", component: CreateBioComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

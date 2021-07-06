@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { Minibio } from '../shared/models/minibio';
 import { MinibioService } from '../shared/services/minibio.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-bio',
@@ -12,8 +13,10 @@ import { MinibioService } from '../shared/services/minibio.service';
 export class CreateBioComponent implements OnInit {
 
   bioForm: FormGroup
+  isEditMode = false
+  bioId?: any
 
-  constructor(private fb: FormBuilder, private notifier: NotifierService, private minibioService: MinibioService) {
+  constructor(private fb: FormBuilder, private notifier: NotifierService, private minibioService: MinibioService, private router: Router, private route: ActivatedRoute) {
 //    const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
     this.bioForm = this.fb.group({
@@ -27,6 +30,20 @@ export class CreateBioComponent implements OnInit {
       linkTitle3: ["", Validators.required],
       linkUrl3: ["", Validators.required],
     })
+
+    this.bioId = this.route.snapshot.paramMap.get('id') // Leemos el parametro de la url
+    if(this.bioId) { // si está en modo edicion
+      this.isEditMode = true
+
+      this.minibioService.getMiniBio(this.bioId).subscribe(data => {
+
+        const minibio: any = data.data()
+        minibio.id = data.id
+
+        this.bioForm.patchValue(minibio)
+
+      })
+    }
   }
 
   ngOnInit() {
@@ -46,20 +63,26 @@ export class CreateBioComponent implements OnInit {
 
     console.log("Guardar minibio", this.bioForm.value)
 
-    // const miniBio: Minibio = {
-    //   title: this.f.title.value,
-    //   description: this.f.description.value,
-    //   image: this.f.image.value,
-    //   linkTitle1: this.f.linkTitle1.value,
-    //   linkUrl1: this.f.linkUrl1.value,
-    //   linkTitle2: this.f.linkTitle2.value,
-    //   linkUrl2: this.f.linkUrl2.value,
-    //   linkTitle3: this.f.linkTitle3.value,
-    //   linkUrl3: this.f.linkUrl3.value
-    // }
-
     this.minibioService.createMinibio(this.bioForm.value).then(success => {
       this.notifier.notify('success', "Todo ok!")
+      this.router.navigate(["/profile"])
+    }).catch(error =>  {
+      this.notifier.notify('error', 'Ups, ha ocurrido un error');
+    })
+  }
+
+  updateMinibio() {
+
+    if(this.bioForm.invalid) {
+      this.notifier.notify('error', 'Los datos no son válidos');
+      return
+    }
+
+    console.log("Actualizar minibio", this.bioForm.value)
+
+    this.minibioService.updateMinibio(this.bioId, this.bioForm.value).then(success => {
+      this.notifier.notify('success', "Actualizado!")
+      this.router.navigate(["/profile"])
     }).catch(error =>  {
       this.notifier.notify('error', 'Ups, ha ocurrido un error');
     })

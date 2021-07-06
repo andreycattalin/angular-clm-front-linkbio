@@ -4,6 +4,7 @@ import { User } from '../shared/models/user';
 import { MinibioService } from '../shared/services/minibio.service';
 import { Minibio } from '../shared/models/minibio';
 import { NotifierService } from 'angular-notifier';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit {
   user: any
   allBios: Array<Minibio> = []
 
-  constructor(private authService: AuthService, private minibioService: MinibioService, private notifier: NotifierService) { }
+  constructor(private authService: AuthService, private minibioService: MinibioService, private notifier: NotifierService, private router: Router) { }
 
   ngOnInit() {
     this.user = this.authService.userData()
@@ -51,5 +52,9 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+
+  editBio(id: any) {
+    this.router.navigate(["edit-bio/" + id])
+  }
 }
 

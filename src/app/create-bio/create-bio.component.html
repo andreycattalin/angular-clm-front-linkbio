@@ -5,7 +5,8 @@
         <div class="col-md-7 col-xl-5">
 
             <div class="mcard">
-                <h3>Crea tu minibio</h3>
+                <h3 *ngIf="!isEditMode">Crea tu minibio</h3>
+                <h3 *ngIf="isEditMode">Edita tu minibio</h3>
 
                 <form [formGroup]="bioForm" class="form-floating mt-4">
                     <div class="form-floating mb-3">
@@ -57,7 +58,8 @@
                         <label for="floatingInput">Url enlace</label>
                     </div>
 
-                    <button type="button" (click)="saveMinibio()" class="btn btn-save">Guardar</button>
+                    <button *ngIf="!isEditMode" type="button" (click)="saveMinibio()" class="btn btn-save">Guardar</button>
+                    <button *ngIf="isEditMode" type="button" (click)="updateMinibio()" class="btn btn-save">Actualizar</button>
                 </form>
 
             </div>
