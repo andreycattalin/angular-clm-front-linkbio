@@ -4,6 +4,9 @@ import { NotifierService } from 'angular-notifier';
 import { Minibio } from '../shared/models/minibio';
 import { MinibioService } from '../shared/services/minibio.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-bio',
@@ -16,9 +19,12 @@ export class CreateBioComponent implements OnInit {
   isEditMode = false
   bioId?: any
 
-  constructor(private fb: FormBuilder, private notifier: NotifierService, private minibioService: MinibioService, private router: Router, private route: ActivatedRoute) {
-//    const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+  uploadPercent: Observable<any> | undefined;
+  downloadURL: Observable<string> | undefined;
+  percent = 0
+  mainImage?: string
 
+  constructor(private storage: AngularFireStorage ,private fb: FormBuilder, private notifier: NotifierService, private minibioService: MinibioService, private router: Router, private route: ActivatedRoute) {
     this.bioForm = this.fb.group({
       title: ["", Validators.required],
       description: ["", Validators.required],
@@ -40,6 +46,9 @@ export class CreateBioComponent implements OnInit {
         const minibio: any = data.data()
         minibio.id = data.id
 
+        console.log( minibio.image)
+        this.mainImage = minibio.image
+
         this.bioForm.patchValue(minibio)
 
       })
@@ -55,7 +64,6 @@ export class CreateBioComponent implements OnInit {
   }
 
   saveMinibio() {
-
     if(this.bioForm.invalid) {
       this.notifier.notify('error', 'Los datos no son válidos');
       return
@@ -88,4 +96,29 @@ export class CreateBioComponent implements OnInit {
     })
   }
 
+  uploadFile(event: any) {
+    const file = event.target.files[0];
+    const filePath = Date.now() + file.name;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file)
+
+    // observe percentage changes
+    task.percentageChanges().subscribe(number => {
+      this.percent = number!
+    })
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL()
+
+          this.downloadURL.subscribe(data => {
+            this.bioForm.patchValue({
+              image: data
+            })
+          })
+
+        })
+     )
+    .subscribe()
+  }
 }

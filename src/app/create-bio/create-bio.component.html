@@ -8,6 +8,9 @@
                 <h3 *ngIf="!isEditMode">Crea tu minibio</h3>
                 <h3 *ngIf="isEditMode">Edita tu minibio</h3>
 
+
+
+
                 <form [formGroup]="bioForm" class="form-floating mt-4">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInput" formControlName="title">
@@ -19,7 +22,18 @@
                         <label for="floatingInput">Descripción</label>
                     </div>
 
-                    <div class="form-floating mb-3">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Imagen de perfil</label>
+                        <input class="form-control" (change)="uploadFile($event)" type="file" id="formFile">
+                    </div>
+
+                    <img *ngIf="downloadURL || mainImage" [src]="(downloadURL | async) || mainImage" class="img-thumbnail" alt="...">
+
+                    <div class="progress mt-1 mb-3">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{'width': percent + '%' }" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                    <div class="form-floating mb-3 d-none">
                         <input type="text" class="form-control" id="floatingInput" formControlName="image">
                         <label for="floatingInput">Url imagen</label>
                     </div>
