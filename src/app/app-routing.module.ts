@@ -5,10 +5,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { CreateBioComponent } from './create-bio/create-bio.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { MinibioComponent } from './minibio/minibio.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full" },
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: "profile/edit", component: EditProfileComponent, canActivate: [AuthGuard] },
   { path: "create-bio", component: CreateBioComponent, canActivate: [AuthGuard] },
   { path: "edit-bio/:id", component: CreateBioComponent, canActivate: [AuthGuard] },
   { path: "bio/:userid/:id", component: MinibioComponent }

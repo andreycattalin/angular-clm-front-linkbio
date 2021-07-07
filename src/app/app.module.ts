@@ -15,21 +15,25 @@ import { MenuComponent } from './components/menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule } from 'angular-notifier';
 import { MinibioComponent } from './minibio/minibio.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
       HomeComponent,
       ProfileComponent,
       CreateBioComponent,
       MenuComponent,
-      MinibioComponent
+      MinibioComponent,
+      EditProfileComponent
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
@@ -37,7 +41,10 @@ import { MinibioComponent } from './minibio/minibio.component';
       // Custom options in here
     }),
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    { provide: BUCKET, useValue: 'images' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

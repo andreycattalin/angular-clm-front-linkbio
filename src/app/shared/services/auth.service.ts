@@ -23,6 +23,29 @@ export class AuthService {
     }
     return this.fireStore.collection('users').doc(user.uid).set(userData, {
       merge: true
+    }).then(success => {
+      this.getCurrentUser()
+    })
+  }
+
+  updateProfile(user: any) {
+    const uid = this.userData().uid
+    return this.fireStore.collection('users').doc(uid).set(user, {
+      merge: true
+    })
+  }
+
+  updateLocalData(user: any) {
+    const data = this.userData()
+    data.username = user.username
+
+    localStorage.setItem('user', JSON.stringify(data));
+  }
+
+  getCurrentUser() {
+    const uid = this.userData().uid
+    this.fireStore.collection('users').doc(uid).get().subscribe(data => {
+      this.updateLocalData(data.data())
     })
   }
 
@@ -34,7 +57,7 @@ export class AuthService {
      }).catch((error) => {
         throwError(error)
      })
-   }
+  }
 
   isLoggedIn(): boolean {
     const user = localStorage.getItem('user');

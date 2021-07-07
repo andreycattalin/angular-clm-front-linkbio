@@ -1,0 +1,19 @@
+<div class="container mt-4">
+
+    <!-- Head -->
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-xl-5 text-end">
+
+            <form [formGroup]="mForm" (ngSubmit)="saveProfile()">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="username" formControlName="username">
+                    <label for="floatingInput">Nombre de usuario</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
