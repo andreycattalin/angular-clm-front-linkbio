@@ -24,7 +24,9 @@ export class AuthService {
     return this.fireStore.collection('users').doc(user.uid).set(userData, {
       merge: true
     }).then(success => {
-      this.getCurrentUser()
+      this.getCurrentUser().subscribe(data => {
+        this.updateLocalData(data.data())
+      })
     })
   }
 
@@ -40,13 +42,12 @@ export class AuthService {
     data.username = user.username
 
     localStorage.setItem('user', JSON.stringify(data));
+    this.router.navigate(['/profile'])
   }
 
   getCurrentUser() {
     const uid = this.userData().uid
-    this.fireStore.collection('users').doc(uid).get().subscribe(data => {
-      this.updateLocalData(data.data())
-    })
+    return this.fireStore.collection('users').doc(uid).get()
   }
 
   googleAuth(): Promise<any> {

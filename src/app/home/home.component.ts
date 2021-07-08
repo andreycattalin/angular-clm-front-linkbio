@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   login() {
     this.authService.googleAuth().then( success => {
-      this.router.navigate(['/profile'])
+      console.log("Login correcto")
     }).catch(error => {
       console.error("Error en el login")
     })
